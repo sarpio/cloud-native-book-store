@@ -13,9 +13,9 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/sarpio/cloud-native-book-store
+          uri: https://github.com/sarpio/cloud-native-book-store.git
           default-label: main
           clone-on-start: true
           force-pull: true
           timeout: 5
-          search-paths: config-repo
+          search-paths: configuration
