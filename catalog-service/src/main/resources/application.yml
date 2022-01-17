@@ -8,6 +8,13 @@ server:
 spring:
   application:
     name: catalog-service
+  datasource:
+    username: root
+    password: password
+    url: jdbc:mysql://localhost:3306/polardb_catalog
+    hikari:
+      connection-timeout: 2000
+      maximum-pool-size: 5
   config:
     import: "optional:configserver:"
   profiles:

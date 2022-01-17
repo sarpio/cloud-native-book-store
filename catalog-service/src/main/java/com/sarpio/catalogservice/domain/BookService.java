@@ -2,14 +2,16 @@ package com.sarpio.catalogservice.domain;
 
 import java.util.Optional;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
 public class BookService {
 
     private final BookRepository bookRepository;
+
+    public BookService(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
+    }
 
     public Iterable<Book> viewBookList() {
         return bookRepository.findAll();
@@ -39,11 +41,17 @@ public class BookService {
         if (existingBook.isEmpty()) {
             return addBookToCatalog(book);
         }
-        var bookToUpdate = new Book(
+        Book bookToUpdate = new Book(
+                existingBook.get().id(),
                 existingBook.get().isbn(),
                 book.title(),
                 book.author(),
-                book.price());
+                book.price(),
+                book.publisher(),
+                existingBook.get().createdDate(),
+                existingBook.get().lastModifiedDate(),
+                existingBook.get().version());
         return bookRepository.save(bookToUpdate);
     }
+
 }
